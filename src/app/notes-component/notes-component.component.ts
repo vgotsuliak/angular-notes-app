@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Note } from './note';
+import { HttpModule, Http }    from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'notes-component',
   templateUrl: './notes-component.component.html',
-  styleUrls: ['./notes-component.component.css']
+  styleUrls: ['./notes-component.component.css'],
 })
 export class NotesComponentComponent implements OnInit {
 
+  private notesUrl = 'http://localhost:8080/notes';
   notes: Note[];
   text:string;
 
-  constructor() { }
+  constructor(private http:Http) { }
 
   ngOnInit() {
-    this.notes = [
-      {text: 'note 1'},
-      {text: 'note 2'},
-    ];
+    this.getNotes().then(notes => this.notes = notes);
   }
 
   addNote(text:string):void {
@@ -28,6 +28,12 @@ export class NotesComponentComponent implements OnInit {
 
   removeNote(index:number):void {
     this.notes.splice(index, 1);
+  }
+
+  getNotes(): Promise<Note[]> {
+    return this.http.get(this.notesUrl)
+      .toPromise()
+      .then(response => response.json() as Note[]);
   }
 
 }
