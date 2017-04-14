@@ -1,0 +1,11 @@
+[contenteditable]:focus {
+  outline: 0px solid transparent;
+}
+
+.notes-content-card {
+  height: 400px;
+}
+
+.notes-content {
+  height:100%;
+}

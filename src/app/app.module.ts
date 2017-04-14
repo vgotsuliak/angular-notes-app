@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { NotesComponentComponent } from './notes-component/notes-component.component';
+import {MdCardModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { NotesComponentComponent } from './notes-component/notes-component.compo
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    MdCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
